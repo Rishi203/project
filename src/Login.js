@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 import fuser from './images/fusername.jpg';
 import fpass from './images/Fpass.jpg';
-
 
 function Login()
 {   
