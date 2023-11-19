@@ -26,58 +26,56 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Check if the passwords match
-    if (formData.password !== formData.confirmPassword) {
-      console.error("Passwords do not match");
-      // You can handle this error, show a message to the user, etc.
-      return;
-    }
-  
-    // Exclude "confirmPassword" when sending data to the backend
-    const { confirmPassword, ...dataToSend } = formData;
-  
-    try {
-      const response = await axios.post("http://localhost:5000/api/users", dataToSend);
-  
-      if (response && response.data) {
-        if (response.data.message === "user exists") {
-          // Display a popup message for user already exists
-          setSuccessMessage("User already exists. Please log in.");
-          setShowPopup(true);
-        } else {
-          console.log(response.data); // You can handle the response as needed
-  
-          // Set success message and show the popup
-          setSuccessMessage("Successfully registered. Please login to go into your account.");
-          setShowPopup(true);
-        }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (formData.password !== formData.confirmPassword) {
+    console.error("Passwords do not match");
+    return;
+  }
+
+  const { confirmPassword, ...dataToSend } = formData;
+
+  try {
+    const response = await axios.post("http://localhost:5000/api/users", dataToSend);
+
+    console.log("Server response:", response);
+
+    if (response && response.data) {
+      console.log("Response data:", response.data);
+
+      if (response.status === 201) {
+        setSuccessMessage("Successfully registered. Please login to go into your account.");
+      } else if (response.status === 409) {
+        console.log("User already exists:", response.data);
+
+        setSuccessMessage("User already exists. Please log in.");
       } else {
-        console.error("Invalid response from server:", response);
-        // Handle the situation where response or response.data is undefined
+        console.error("Unexpected status code:", response.status);
       }
-    } catch (error) {
-      console.error("Error registering user:", error.response ? error.response.data : error.message);
-      // Handle error, show a message to the user, etc.
-    } finally {
-      // Reset the form after a certain time (e.g., 5 seconds)
-      setTimeout(() => {
-        setShowPopup(false);
-        setSuccessMessage("");
-        setFormData({
-          userName: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-          phoneNumber: "",
-          dob: "",
-          gender: "",
-        });
-      }, 5000);
+
+      setShowPopup(true);
+    } else {
+      console.error("Invalid response from server:", response);
     }
-  };
+  } catch (error) {
+    console.error("Error registering user:", error.response ? error.response.data : error.message);
+  } finally {
+    setTimeout(() => {
+      setShowPopup(false);
+      setSuccessMessage("");
+      setFormData({
+        userName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phoneNumber: "",
+        dob: "",
+        gender: "",
+      });
+    }, 5000);
+  }
+};
 
   const closePopup = () => {
     setShowPopup(false);
