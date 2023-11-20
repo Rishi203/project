@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import fuser from './images/fusername.jpg';
 import fpass from './images/Fpass.jpg';
+import { useAuth } from './AuthContext'; // Update the path
+
+
 
 function Login() {
+  const auth = useAuth();
+ // Add this line to get the login function from the AuthContext
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,21 +28,46 @@ function Login() {
     e.preventDefault();
 
     try {
+      console.log("Auth context:", auth);
       const response = await axios.post("http://localhost:5000/api/users/login", formData);
-
       if (response && response.data) {
-        console.log(response.data); // You can handle the response as needed
-        // Redirect to the user's dashboard or handle successful login
+        console.log(response.data);
+        auth.login(response.data._id);
+ // Save the user ID using the login function
         navigate("/Landing");
       } else {
         console.error("Invalid response from server:", response);
-        // Handle the situation where response or response.data is undefined
+        setShowErrorPopup(true);
       }
     } catch (error) {
       console.error("Error logging in:", error.response ? error.response.data : error.message);
-      // Handle error, show a message to the user, etc.
+      setShowErrorPopup(true);
     }
   };
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log("Auth context:", auth);
+      if (auth.isLoggedIn && auth.userId) {
+        navigate("/Landing");
+      }
+    }, 100); // Add a slight delay (e.g., 100 milliseconds)
+  
+    return () => clearTimeout(timeoutId);
+  }, [auth.isLoggedIn, auth.userId, navigate]);
+  
+
+
+  const ErrorModal = ({ onClose }) => (
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded shadow-md z-50">
+      <p className="text-red-500 text-center mb-4">Invalid credentials. Please try again.</p>
+      <button
+        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+        onClick={onClose}
+      >
+        Close
+      </button>
+    </div>
+  );
 
   return (
     <div className="bg-black">
@@ -97,6 +130,10 @@ function Login() {
               </button>
             </div>
           </form>
+
+          {/* Error modal */}
+          {showErrorPopup && <ErrorModal onClose={() => setShowErrorPopup(false)} />}
+
         </div>
       </div>
     </div>

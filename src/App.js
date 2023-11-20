@@ -5,11 +5,12 @@ import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-
+import { AuthProvider } from './AuthContext';
 
 function App() {
   return (
     <>
+    <AuthProvider>
     <BrowserRouter>
     <Routes>
       
@@ -24,6 +25,7 @@ function App() {
 
     </Routes>
     </BrowserRouter>
+    </AuthProvider>
     </>
 
    
