@@ -2,6 +2,7 @@ import React from "react";
 import img1 from "./images/image 1.jpg";
 import { useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
+import { FaArrowDown, FaCaretDown } from "react-icons/fa";
 
 function Home() {
   const navigate = useNavigate();
@@ -80,41 +81,45 @@ function Home() {
       </div>
 
       <div className="flex mt-40">
-        <div className="w-1/2 ml-28 mb-20 ">
-          <h className="text-5xl font-inter font-semibold ml-80">
+        <div className="w-1/2 mb-32 ml-64">
+          <h className="text-5xl font-inter font-semibold ml-72">
             HOW IT WORKS
           </h>
 
-          <div class="flex flex-col gap-6 max-w-sm ml-3 p-4 bg-[#EEFFF0] mt-12 rounded-xl ">
-            <input
-              type="text"
-              placeholder="From"
-              className="py-2 px-5 border bg-[#ADFF45] border-gray-300 rounded-xl placeholder:text-black"
-            />
-            <input
-              type="text"
-              placeholder="To"
-              className="py-2 px-5 border bg-[#ADFF45] border-gray-300 rounded-xl placeholder:text-black "
-            />
-            <input
-              type="Date"
-              className="py-2 px-5 border bg-[#ADFF45] border-gray-300 rounded-xl"
-            />
-            <input
-              type="Time"
-              className="py-2 px-5 border bg-[#ADFF45] border-gray-300 rounded-xl"
-            />
-            <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 rounded-xl">
-              Search
-            </button>
-          </div>
-        </div>
+          <body className="">
+            <div className="container mx-24 my-8 flex justify-between">
+              <div className="w-1/3 bg-white p-4 rounded-3xl shadow-xl flex flex-col items-center mr-32 ">
+                <div className="text-3xl text-blue-500 mb-2">
+                  <FaCaretDown size={40} color="#5FAC00" />
+                </div>
+                <h2 class="text-lg font-semibold mb-2">Book ride</h2>
+                <p>
+                  Book your ride through your favorite ride booking app or book
+                  a taxi.
+                </p>
+              </div>
 
-        <div className="w-1/2 mx-auto my-40">
-          <p className="text-3xl mr-44 font-semibold font-inter text-center">
-            Your Ride Is Just A Search Away! Enter Your Destination To Find
-            Available Rides And Start Your Journey Hassle Free
-          </p>
+              <div class="w-1/3 bg-white p-4 rounded-3xl shadow-xl flex flex-col items-center mr-32">
+                <div class="text-3xl text-green-500 mb-2">
+                  <FaCaretDown size={40} color="#5FAC00" />
+                </div>
+                <h2 class="text-lg font-semibold mb-2 text-center">
+                  Place Request
+                </h2>
+                <p>
+                  Login to your UrbanLink account and place a new pool request.
+                </p>
+              </div>
+
+              <div class="w-1/3 bg-white p-4 rounded-3xl shadow-xl flex flex-col items-center">
+                <div class="text-3xl text-yellow-500 mb-2">
+                  <FaCaretDown size={40} color="#5FAC00" />
+                </div>
+                <h2 class="text-lg font-semibold mb-2 ">Pool accepted</h2>
+                <p>Wait for your pool to be accepted and enjoy your savings.</p>
+              </div>
+            </div>
+          </body>
         </div>
       </div>
       <div>
