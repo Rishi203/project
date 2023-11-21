@@ -124,7 +124,7 @@ function Signup() {
                 </span>
                 <input
                   type="text"
-                  placeholder="Email or Username"
+                  placeholder="Fullname"
                   className="px-12 py-2 rounded-md mb-4 shadow-xl border border-black w-full"
                   name="userName"
                   onChange={handleChange}

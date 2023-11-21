@@ -27,13 +27,16 @@ const Layout = () => {
   };
 
   return (
-    <div className="bg-[#EEFFF0] flex">
-      <Sidebar open={open} toggleSidebar={toggleSidebar} />
-      <div className=" flex flex-col w-full mx-10">
-        <Navbar />
-        <MainContent />
+    <>
+      <div className="w-50"></div>
+      <div className="bg-[#EEFFF0] flex">
+        <Sidebar open={open} toggleSidebar={toggleSidebar} />
+        <div className=" flex flex-col w-full mx-10">
+          <Navbar />
+          <MainContent />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
