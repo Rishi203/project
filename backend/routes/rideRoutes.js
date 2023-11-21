@@ -14,4 +14,6 @@ router.get('/rides/:id', rideController.getRideById);
 // Delete a ride by ID
 router.delete('/rides/:id', rideController.deleteRideById);
 
+// Book a ride by ID
+router.put('/rides/:id/book', rideController.bookRide);
 module.exports = router;
