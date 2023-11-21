@@ -5,7 +5,8 @@ const rideSchema = new mongoose.Schema({
     endLocation: { type: String, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     seatsAvailable: { type: Number, required: true },
-    price: { type: Number, required: true }
+    price: { type: Number, required: true },
+    vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle', required: true },
 });
 
 const Ride = mongoose.model('Ride', rideSchema);

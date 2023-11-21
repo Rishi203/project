@@ -77,6 +77,26 @@ const getMe = asyncHandler(async (req, res) => {
     });
   });
 
+  const getUserById = asyncHandler(async (req, res) => {
+    const userId = req.params.id; // Assuming the user ID is passed as a route parameter
+
+    const user = await User.findById(userId).select('-password -token');
+
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    const { _id, userName, email, phoneNumber, dob, gender } = user;
+
+    res.status(200).json({
+        id: _id,
+        userName,
+        email,
+        phoneNumber,
+        dob,
+        gender,
+    });
+});
 
   
 
@@ -92,4 +112,5 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
+    getUserById,
 }

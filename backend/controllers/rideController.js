@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 // Create a new ride
 const createRide = asyncHandler(async (req, res) => {
+    console.log('Received a request to create a vehicle');
     const ride = await Ride.create(req.body);
     res.status(201).json(ride);
 });
