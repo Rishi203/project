@@ -10,7 +10,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black text-white py-4 text-center">
+    <footer className="bg-black text-white py-8 text-center">
       <div className="flex justify-center space-x-4">
         {socialMediaLinks.map((social, index) => (
           <a
@@ -18,9 +18,9 @@ const Footer = () => {
             href={social.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl hover:text-gray-500 transition duration-300"
+            className="text-4xl hover:text-gray-500 transition duration-300"
           >
-            {React.createElement(social.icon)}
+            {React.createElement(social.icon, { size: 30 })}
           </a>
         ))}
       </div>
