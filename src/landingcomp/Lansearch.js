@@ -32,6 +32,7 @@ const Lansearch = () => {
   const getVehicleDetails = async (vehicleId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/vehicles/${vehicleId}`);
+      console.log("respones",response)
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -126,7 +127,7 @@ const Lansearch = () => {
 
       {rides.map((ride) => (
         <Details
-          key={ride._id}
+          rideKey={ride._id}
           startLocation={ride.startLocation}
           endLocation={ride.endLocation}
           vehicleInfo={ride.vehicleModel}

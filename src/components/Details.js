@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { TiLocation } from 'react-icons/ti';
 import { FaCar, FaUser, FaRupeeSign, FaChair, FaClock } from 'react-icons/fa';
 
-function Details({ key, startLocation, endLocation, vehicleInfo, seatsAvailable, price, user }) {
+function Details({ rideKey, startLocation, endLocation, vehicleInfo, seatsAvailable, price, user }) {
   const [availableSeats, setAvailableSeats] = useState(seatsAvailable);
-  console.log('key ==', key);
+  console.log('key ==', rideKey);
   useEffect(() => {
     // Update the local state when seatsAvailable prop changes
     setAvailableSeats(seatsAvailable);
@@ -19,7 +19,7 @@ function Details({ key, startLocation, endLocation, vehicleInfo, seatsAvailable,
 
     try {
       // Update the seats on the server
-      await Axios.put(`http://localhost:5000/api/rides/${key}/book`, { availableSeats: availableSeats - 1 });
+      await Axios.put(`http://localhost:5000/api/rides/${rideKey}/book`, { availableSeats: availableSeats - 1 });
 
       // Update the local state
       setAvailableSeats(prevSeats => prevSeats - 1);
